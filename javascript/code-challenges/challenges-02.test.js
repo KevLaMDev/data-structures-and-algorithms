@@ -21,7 +21,9 @@ Write a function named addOne that, given an array of numbers, uses map to retur
 ------------------------------------------------------------------------------------------------ */
 
 const addOne = (arr) => {
-  // Solution code here...
+  return arr.map(el => {
+    return el + 1;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -31,7 +33,9 @@ Write a function named addQuestion that, given an array of strings, uses map to 
 ------------------------------------------------------------------------------------------------ */
 
 const addQuestion = (arr) => {
-  // Solution code here...
+  return arr.map(el => {
+    return el + '?';
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -45,7 +49,11 @@ For example, twoToThe([1,2,3]) returns [2,4,8] because 2 ^ 1 = 2, 2 ^ 2 = 4, and
 ------------------------------------------------------------------------------------------------ */
 
 const forLoopTwoToThe = (arr) => {
-  // Solution code here...
+  const newArr = [];
+  for (let i = 0; i < arr.length; i++) {
+    newArr.push(2 ** arr[i]);
+  };
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -55,7 +63,11 @@ Write a function named forEachTwoToThe that produces the same output as your for
 ------------------------------------------------------------------------------------------------ */
 
 const forEachTwoToThe = (arr) => {
-  // Solution code here...
+  const newArr = [];
+  arr.forEach(el => {
+    newArr.push(2 ** el);
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -65,7 +77,9 @@ Write a function named mapTwoToThe that produces the same output as your forLoop
 ------------------------------------------------------------------------------------------------ */
 
 const mapTwoToThe = (arr) => {
-  // Solution code here...
+  return arr.map(el => {
+    return 2 ** el;
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -79,7 +93,9 @@ For example: charCode(['h','i']) returns [104, 105].
 ------------------------------------------------------------------------------------------------ */
 
 const charCode = (arr) => {
-  // Solution code here...
+  return arr.map(letter => {
+    return letter.charCodeAt();
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -93,7 +109,11 @@ For example: evenOdd([1,2,3]) returns ['odd','even','odd'].
 ------------------------------------------------------------------------------------------------ */
 
 const evenOdd = (arr) => {
-  // Solution code here...
+  return arr.map(el => {
+    if (el % 2 === 0) return 'even';
+    else if (el % 2 === 1) return 'odd';
+    else return 'N/A';
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -139,8 +159,16 @@ const snorlaxAbilities = {
 };
 
 const extractAbilities = (arr) => {
-  // Solution code here...
+  return arr.map(obj => {
+    return obj.ability.name;
+  });
 };
+// input: array of nested objs
+// output: array of ability names
+  // use map to iterate over array els
+    /* return arr.map(obj => {
+      return obj.ability.name
+    })
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
@@ -186,8 +214,26 @@ const snorlaxStats = {
 };
 
 const extractStats = (arr) => {
-  // Solution code here...
+  return arr.map(el => {
+    return (
+      {
+        name: el.stat.name,
+        total: el.effort + el.baseStat
+      }
+    );
+  });
 };
+
+// input: array of nested objs
+// output: array of objs containing stat name and total(effort + baseStat)
+  // map on arr 
+    /* return arr.map(obj => {
+      return {
+        obj.stat.name,
+        obj.effort + obj.baseStat
+      };
+    })
+
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -251,14 +297,14 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return an array containing the character code for each letter', () => {
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1'])).toStrictEqual([ 67, 111, 100, 101, 51, 48, 49 ]);
     expect(charCode(['C', 'o', 'd', 'e', '3', '0', '1']).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should return an array containing the keys from an object', () => {
     expect(evenOdd([5, 8, 2, 6, 9, 13, 542, 541])).toStrictEqual([ 'odd', 'even', 'even', 'even', 'odd', 'odd', 'even', 'odd' ]);
     expect(evenOdd([5, 8, 2, 6, 9, 13, 542, 541]).length).toStrictEqual(8);
@@ -280,14 +326,14 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should return an array containing only the ability names', () => {
     expect(extractAbilities(snorlaxAbilities.abilities)).toStrictEqual(['gluttony', 'cute charm', 'immunity']);
     expect(extractAbilities(snorlaxAbilities.abilities).length).toStrictEqual(3);
   });
 });
 
-xdescribe('Testing challenge 10', () => {
+describe('Testing challenge 10', () => {
   test('It should return an array containing objects with name and total values', () => {
     expect(extractStats(snorlaxStats.stats)).toStrictEqual([
       { name: 'speed', total: 35, },
