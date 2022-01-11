@@ -41,7 +41,11 @@ Use `forEach` to loop over the input array. The modified strings should each be 
 ------------------------------------------------------------------------------------------------ */
 
 const allUpperCase = (arr) => {
-  // Solution code here...
+  const newArr = [];
+  arr.forEach(el => {
+    newArr.push(el.toUpperCase());
+  });
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -55,11 +59,15 @@ Use `forEach` to build a new array of strings, each string modified by the callb
 ------------------------------------------------------------------------------------------------ */
 
 const greeting = (word) => {
-  // Solution code here...
+  return word.toUpperCase() + '!';
 };
 
 const speaker = (words, callback) => {
-  // Solution code here...
+  const newArr = [];
+  words.forEach(el => {
+    newArr.push(callback(el))
+  })
+  return newArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -79,11 +87,16 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const addValues = (arr, value) => {
-  // Solution code here...
+  arr.push(value);
 };
 
 const addNumbers = (num, arr, times, callback) => {
-  // Solution code here...
+  let counter = 0;
+  while (counter < times) {
+    callback(arr, num);
+    counter++;
+  };
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -105,8 +118,20 @@ This function should use forEach to populate your grocery list based on the stor
 ------------------------------------------------------------------------------------------------ */
 
 const createList = (availableItems) => {
-  // Solution code here...
+  const list = [];
+  availableItems.forEach(el => {
+    if (el.available === true) {
+      list.push(el.name);
+    }
+  })
+  return list;
 };
+// input: array of objects
+// output: array of string names
+  // for each on each el of inventory array
+    // conditional check: if el.available === true
+      // push el.name into list array
+// return list array;
 
 /* ------------------------------------------------------------------------------------------------
 STRETCH - CHALLENGE 7
@@ -123,8 +148,25 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
+  const newArr = [];
+  arr.forEach(el => {
+    if (el % 3 === 0 && el % 5 === 0) newArr.push('Fizz Buzz');
+    else if (el % 3 === 0) newArr.push('Fizz');
+    else if (el % 5 === 0) newArr.push('Buzz');
+    else newArr.push(el);
+  })
+  return newArr;
 };
+// input: array of nums
+// output: new arr 
+  // declare new arr 
+  // for each on els of arr 
+    // conditional checks
+      // if el % 3 === 0 && el % 5 === 0 push 'Fizz Buzz'
+      // else if el % 3 === 0 push 'Fizz'
+      // else if el % 5 === 0 push 'Buzz' 
+      // else push el
+// return new arr
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -177,7 +219,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   test('It should print out messages or numbers', () => {
