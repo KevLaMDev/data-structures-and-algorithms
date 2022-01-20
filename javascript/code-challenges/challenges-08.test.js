@@ -55,8 +55,9 @@ let characters = [
 ];
 
 const sortByChildren = (charArray) => {
+  return charArray.sort((objA, objB) => objA.children.length - objB.children.length);
+};
 
-}
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
@@ -109,7 +110,7 @@ Return an array containing all the matches.
 const isCapitalized = (str) => {
   str = str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
   let strArr = str.split(' ');
-  return strArr.filter(word => /[A-Z]/.test(word) )
+  return strArr.filter(word => /^[A-Z]/.test(word) )
 };
 
 /* ------------------------------------------------------------------------------------------------
